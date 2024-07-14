@@ -17,6 +17,7 @@ const CustomerFilter = ({
 
   return (
     <div className="flex gap-5  flex-col md:flex-row ">
+      {/* Filter by customer dropdown */}
       <div className="w-full flex-1">
         <label className="block mb-2 text-lg">Filter by customer</label>
         <Select
@@ -28,8 +29,9 @@ const CustomerFilter = ({
           placeholder="Search..."
         />
       </div>
+      {/* Filter by amount input */}
       <div className="w-full flex-1">
-        <label className="block mb-2 text-lg">Filter by amount:</label>
+        <label className="block mb-2 text-lg">Filter by amount</label>
         <input
           type="number"
           className="block w-full p-2 border border-gray-300 rounded mb-4"

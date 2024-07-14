@@ -10,13 +10,14 @@ const TransactionChart = ({ selectedCustomer, transactions }) => {
 
   const chartData = () => {
     if (!selectedCustomer) return {}
-
+    // Filter transactions for selected customer
     const customerTransactions = transactions.filter(
       (transaction) => transaction.customer_id == selectedCustomer.id
     )
     const dates = [
       ...new Set(customerTransactions.map((transaction) => transaction.date)),
     ]
+    // Calculate total amount per day for selected customer
     const amounts = dates.map((date) => {
       return customerTransactions
         .filter((transaction) => transaction.date == date)
@@ -26,6 +27,7 @@ const TransactionChart = ({ selectedCustomer, transactions }) => {
     return {
       labels: dates,
       datasets: [
+        // Line chart for total amount per day
         {
           label: `Total amount per day for ${selectedCustomer.name} (Line)`,
           data: amounts,
@@ -34,6 +36,7 @@ const TransactionChart = ({ selectedCustomer, transactions }) => {
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1,
         },
+        // Bar chart for total amount per day
         {
           label: `Total amount per day for ${selectedCustomer.name} (Bar)`,
           data: amounts,
@@ -50,7 +53,7 @@ const TransactionChart = ({ selectedCustomer, transactions }) => {
     if (chartInstanceRef.current) {
       chartInstanceRef.current.destroy()
     }
-
+    // Render chart for selected customer
     if (selectedCustomer && chartContainerRef.current) {
       chartInstanceRef.current = new Chart(chartContainerRef.current, {
         data: chartData(),
