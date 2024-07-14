@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
-import ReactPaginate from 'react-paginate'
-
 
 const CustomerTable = ({
   customers,
   filteredTransactions,
   handleSelectCustomer,
 }) => {
+  // State to track the current page
   const [currentPage, setCurrentPage] = useState(0)
+  // Number of items per page
   const itemsPerPage = 9
-
-  const handlePageClick = (data) => {
-    setCurrentPage(data.selected)
+  // Function to handle page clicks
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber)
   }
-
+  // Calculate the offset and get the items for the current page
   const offset = currentPage * itemsPerPage
   const currentItems = filteredTransactions.slice(offset, offset + itemsPerPage)
+  // Calculate the total number of pages
+  const pageCount = Math.ceil(filteredTransactions.length / itemsPerPage)
 
   return (
     <div>
@@ -49,30 +51,19 @@ const CustomerTable = ({
           ))}
         </tbody>
       </table>
-      <div className="mt-4">
-        {/* Pagination component */}
-        <ReactPaginate
-          // previousLabel={'previous'}
-          // nextLabel={'next'}
-          breakLabel={'...'}
-          breakClassName={'break-me'}
-          pageCount={Math.ceil(filteredTransactions.length / itemsPerPage)}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageClick}
-          containerClassName={'pagination'}
-          activeClassName={'active bg-green-500 text-white'}
-          className="w-full md:w-1/2 mx-auto flex justify-between items-center px-5"
-          pageClassName={
-            'inline-block px-3 py-1 border border-gray-300 rounded'
-          }
-          previousClassName={
-            'inline-block px-3 py-1 border border-gray-300 rounded'
-          }
-          nextClassName={
-            'inline-block px-3 py-1 border border-gray-300 rounded'
-          }
-        />
+      <div className="mt-4 flex justify-center">
+        {/* Render pagination buttons */}
+        {Array.from({ length: pageCount }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => handlePageClick(i)}
+            className={`mx-1 px-3 py-1 border ${
+              i === currentPage ? 'bg-green-500 text-white' : 'border-gray-300'
+            } rounded`}
+          >
+            {i + 1}
+          </button>
+        ))}
       </div>
     </div>
   )
