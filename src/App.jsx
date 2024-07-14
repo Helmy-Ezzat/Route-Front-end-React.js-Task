@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getCustomers, getTransactions } from './services/api'
 import CustomerFilter from './components/CustomerFilter'
-import CustomerTable from './components/CustomerTable '
+import CustomerTable from './components/CustomerTable'
 import TransactionChart from './components/TransactionChart'
 
 function App() {
