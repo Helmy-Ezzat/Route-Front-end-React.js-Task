@@ -37,7 +37,7 @@ const CustomerTable = ({
               className="hover:bg-gray-100 cursor-pointer"
               onClick={() => handleSelectCustomer(transaction.customer_id)}
             >
-              <td className="py-2 px-4 border-b">
+              <td className="py-2 px-4 border-b text-sm md:text-lg">
                 {/* Display customer name */}
                 {
                   customers.find(
@@ -45,8 +45,10 @@ const CustomerTable = ({
                   )?.name
                 }
               </td>
-              <td className="py-2 px-4 border-b">{transaction.date}</td>
-              <td className="py-2 px-4 border-b">{transaction.amount}</td>
+              <td className="py-2 px-4 border-b text-sm md:text-lg">{transaction.date}</td>
+              <td className="py-2 px-4 border-b text-sm md:text-lg">
+                {transaction.amount}
+              </td>
             </tr>
           ))}
         </tbody>

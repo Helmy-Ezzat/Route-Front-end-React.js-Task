@@ -65,51 +65,53 @@ function App() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Application title */}
-      <h1 className="text-3xl font-bold mb-6 text-center text-green-500">
-        Customer Transactions
-      </h1>
-      <div className="flex flex-col md:flex-row gap-5">
-        {/* Filter and customer table section */}
-        <div className="flex-1">
-          <CustomerFilter
-            customers={customers}
-            handleFilterCustomerID={handleFilterCustomerID}
-            handleFilterAmount={handleFilterAmount}
-          />
-          <CustomerTable
-            customers={customers}
-            filteredTransactions={filteredTransactions}
-            handleSelectCustomer={handleSelectCustomer}
-          />
-        </div>
-        {/* Transaction chart section */}
-        <div className="flex-1">
-          <div className="mt-4 p-4 bg-white shadow rounded-lg">
-            <label className="block mb-2 text-lg">
-              Select customer for chart:
-            </label>
-            <select
-              className="block w-full p-2 border border-gray-300 rounded"
-              onChange={(e) => handleSelectCustomer(e.target.value)}
-            >
-              <option value="">None</option>
-              {customers.map((customer) => (
-                <option key={customer.id} value={customer.id}>
-                  {customer.name}
-                </option>
-              ))}
-            </select>
+    <section className="mt-8">
+        {/* Application title */}
+        <h1 className="text-3xl font-bold mb-10 text-center text-green-500">
+          Customer Transactions
+        </h1>
+      <div className="container mx-auto p-4">
+        <div className="flex flex-col md:flex-row gap-5">
+          {/* Filter and customer table section */}
+          <div className="flex-1">
+            <CustomerFilter
+              customers={customers}
+              handleFilterCustomerID={handleFilterCustomerID}
+              handleFilterAmount={handleFilterAmount}
+            />
+            <CustomerTable
+              customers={customers}
+              filteredTransactions={filteredTransactions}
+              handleSelectCustomer={handleSelectCustomer}
+            />
           </div>
-          {/* Transaction chart component */}
-          <TransactionChart
-            selectedCustomer={selectedCustomer}
-            transactions={transactions}
-          />
+          {/* Transaction chart section */}
+          <div className="flex-1">
+            <div className="mt-4 p-4 bg-white shadow rounded-lg">
+              <label className="block mb-2 text-lg">
+                Select customer for chart:
+              </label>
+              <select
+                className="block w-full p-2 border border-gray-300 rounded"
+                onChange={(e) => handleSelectCustomer(e.target.value)}
+              >
+                <option value="">None</option>
+                {customers.map((customer) => (
+                  <option key={customer.id} value={customer.id}>
+                    {customer.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* Transaction chart component */}
+            <TransactionChart
+              selectedCustomer={selectedCustomer}
+              transactions={transactions}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
